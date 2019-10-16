@@ -1,6 +1,7 @@
 library(tidyverse)
 gapminder <- read_csv("data/gapminder.csv") 
-gapminder_A <- filter(gapminder, country == "Australia")
+gapminder_australia <- filter(gapminder, country == "Australia")
+gapminder_A <- filter(gapminder, str_starts(country, "A"))
 
 
 gapminder_plot <- ggplot(
