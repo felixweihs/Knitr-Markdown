@@ -1,0 +1,56 @@
+---
+title: "WordDocumentTest"
+author: "Felix Weihs"
+date: "16/10/2019"
+output: word_document
+---
+
+```{r global_options}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=TRUE, fig.width=11)
+```
+
+# Data initialisation
+
+## Data initialisation - 1
+
+### Data initialisation - 2
+
+#### Data initialisation - 3
+
+```{r echo=TRUE}
+library(tidyverse)
+gapminder <- read_csv("data/gapminder.csv") 
+gapminder_A <- filter(gapminder, str_starts(country, "A"))
+gapminder_A
+```
+
+There are `r nrow(gapminder)` rows of data for us to work with.
+Statement needing a citation [@<Weihs>]
+
+# Data plot preparation
+
+```{r}
+gapminder_plot <- ggplot(
+  data = gapminder_A, 
+  mapping = aes(y = pop, x = year, size = gdpPercap, colour = country)
+) + geom_point() + 
+  labs(title = "A graph about Australia", 
+       x = "Year", 
+       y = "Population",
+       caption = "Data source: Gapminder") + 
+  ylim(0, NA) +
+  theme(legend.position="bottom",
+        legend.title = element_text(colour="black", size=12, face="bold"),
+        axis.title.x = element_text(face="bold"),
+        axis.title.y = element_text(face="bold"))
+```
+
+# Data plotting
+
+``` {r fig.cap = "**Figure 1** This shows some data"}
+gapminder_plot
+```
+
+# References
+
+This file was created using RMarkdown (R version: `r getRversion()` + Tidyverse version: `r packageVersion("tidyverse")`)
